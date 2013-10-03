@@ -604,4 +604,11 @@
     <!-- Bluetooth settings. A checkbox to set if we should accept all the file types regardless of their presence in MIME type whitelist -->
     <string name="bluetooth_accept_all_files">Accept all file types</string>
 
+    <!-- Sound & display settings screen, setting options for LCD density -->
+    <string name="lcd_density">LCD density</string>
+    <string name="lcd_density_summary">%d DPI</string>
+    <string name="lcd_density_default">default</string>
+    <string name="lcd_density_unsupported">Unsupported</string>
+    <string name="restarting_ui">Restarting UI\u2026</string>
+
 </resources>
