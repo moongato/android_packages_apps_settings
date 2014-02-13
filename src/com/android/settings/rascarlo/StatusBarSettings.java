@@ -1,6 +1,9 @@
 
 package com.android.settings.rascarlo;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -10,10 +13,16 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+
+import com.android.settings.rascarlo.SeekBarPreference;
 
 public class StatusBarSettings extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
@@ -31,6 +40,10 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
     // Quick Settings
     private static final String QUICK_SETTINGS_CATEGORY = "status_bar_quick_settings_category";
     private static final String QUICK_PULLDOWN = "quick_pulldown";
+    // Network Stats
+    private static final String STATUS_BAR_NETWORK_STATS = "status_bar_show_network_stats";
+    private static final String NETWORK_STATS_UPDATE_FREQUENCY = "network_stats_update_frequency";
+    private static final String STATUS_BAR_NETWORK_HIDE = "status_bar_network_hide";
 
     // General
     private PreferenceCategory mStatusBarGeneralCategory;
@@ -45,6 +58,14 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
     private CheckBoxPreference mStatusBarClock;
     // Quick Settings
     private ListPreference mQuickPulldown;
+    // Network Stats
+    private SeekBarPreference mNetworkStatsUpdateFrequency;
+    private CheckBoxPreference mStatusBarNetworkStats;
+    private CheckBoxPreference mStatusBarNetworkHide;
+
+    private static final int MENU_RESET = Menu.FIRST;
+
+    static final int DEFAULT_NETWORK_USAGE_COLOR = 0xffffffff;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,7 +142,24 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
                 mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
                 mQuickPulldown.setSummary(mQuickPulldown.getEntry());
             }
-        }
+            // Network Stats
+            mStatusBarNetworkStats = (CheckBoxPreference) getPreferenceScreen().findPreference(STATUS_BAR_NETWORK_STATS);
+            mStatusBarNetworkStats.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                     Settings.System.STATUS_BAR_NETWORK_STATS, 0) == 1));
+
+            mNetworkStatsUpdateFrequency = (SeekBarPreference)
+                    getPreferenceScreen().findPreference(NETWORK_STATS_UPDATE_FREQUENCY);
+            mNetworkStatsUpdateFrequency.setValue((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, 500)));
+            mNetworkStatsUpdateFrequency.setOnPreferenceChangeListener(this);
+
+            // hide if there's no traffic
+            mStatusBarNetworkHide = (CheckBoxPreference) getPreferenceScreen().findPreference(STATUS_BAR_NETWORK_HIDE);
+            mStatusBarNetworkHide.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_NETWORK_HIDE, 0) == 1));
+
+            setHasOptionsMenu(true);
+    }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
 
@@ -149,6 +187,12 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
             mQuickPulldown.setSummary(mQuickPulldown.getEntries()[quickPulldownIndex]);
             return true;
 
+        } else if (preference == mNetworkStatsUpdateFrequency) {
+            int i = Integer.valueOf((Integer) objValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, i);
+            return true;
+
         }
         return false;
     }
@@ -165,6 +209,17 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
             value = mStatusBarDoubleTapSleepGesture.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE, value ? 1: 0);
+            return true;
+
+        } else if (preference == mStatusBarNetworkStats) {
+            value = mStatusBarNetworkStats.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_NETWORK_STATS, value ? 1 : 0);
+            return true;
+        } else if (preference == mStatusBarNetworkHide) {
+            value = mStatusBarNetworkHide.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_NETWORK_HIDE, value ? 1 : 0);
             return true;
 
         } else if (preference == mStatusBarClock) {
