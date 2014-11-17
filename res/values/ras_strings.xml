@@ -68,4 +68,8 @@
     <!-- Advanced reboot options -->
     <string name="advanced_reboot_title">Advanced reboot</string>
     <string name="advanced_reboot_summary">When unlocked, include options in the power menu for rebooting into recovery, bootloader or performing a soft reboot</string>
-    </resources>
+
+    <!-- App ops -->
+    <string name="app_ops_title">App ops</string>
+    <string name="app_ops_summary">Fine-grained application permission controls</string>
+</resources>
