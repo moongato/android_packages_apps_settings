@@ -2138,7 +2138,7 @@
     <string name="selinux_status">SELinux status</string>
     
     <!-- About phone screen, Mod version -->
-    <string name="mod_version">Mod version</string>
+    <string name="mod_version">Frank Version</string>
     <string name="mod_version_default">Unknown</string>
     
     <!-- About phone screen, show when a value of some status item is unavailable. -->
