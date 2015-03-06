@@ -8,7 +8,13 @@
 
     <!-- SuperSU header name - the app hides itself from launcher based on this resource name being present in com.android.settings -->
     <string name="supersu_title">SuperSU</string>
+<<<<<<< HEAD
 =======
 >>>>>>> 603ec58... Show Chroma build date
+=======
+
+    <!-- BitSyko Layers -->
+    <string name="bitsyko_layers">Layers</string>
+>>>>>>> 6814172... Add tile to launch BitSyko Layers App from Settings
 </resources>
 
