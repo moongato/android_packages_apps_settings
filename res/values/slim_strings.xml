@@ -611,4 +611,7 @@
     <string name="lcd_density_unsupported">Unsupported</string>
     <string name="restarting_ui">Restarting UI\u2026</string>
 
+    <!-- SuperSU header name - the app hides itself from launcher based on this resource name being present in com.android.settings -->
+    <string name="supersu_title">SuperSU</string>
+
 </resources>
