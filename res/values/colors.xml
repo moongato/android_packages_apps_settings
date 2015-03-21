@@ -79,6 +79,7 @@
 
     <color name="wifi_divider">#ffe0e0e0</color>
     <color name="sim_noitification">@*android:color/material_deep_teal_500</color>
+    <color name="wifi_assistant_color_accent">#ff009587</color>
     
     <!-- Exposed resources for theming -->
     <color name="exposed_bg_dark">#ffffffff</color>
