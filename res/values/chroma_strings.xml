@@ -15,6 +15,12 @@
 
     <!-- BitSyko Layers -->
     <string name="bitsyko_layers">Layers</string>
+<<<<<<< HEAD
 >>>>>>> 6814172... Add tile to launch BitSyko Layers App from Settings
+=======
+
+   <!-- Dev Options Enabled by Default -->
+    <string name="show_dev_already_enabled">No need, development settings are enabled by default.</string>
+>>>>>>> ecf5fe0... Enable Development Settings By Default regardless of build type
 </resources>
 
