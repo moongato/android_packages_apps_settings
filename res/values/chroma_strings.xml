@@ -4,8 +4,11 @@
     <!-- About phone screen, build date of ROM -->
     <string name="build_date">Chroma build date</string>
     <string name="build_date_default">2015-01-01-0000</string>
+<<<<<<< HEAD
 
     <!-- SuperSU header name - the app hides itself from launcher based on this resource name being present in com.android.settings -->
     <string name="supersu_title">SuperSU</string>
+=======
+>>>>>>> 603ec58... Show Chroma build date
 </resources>
 
