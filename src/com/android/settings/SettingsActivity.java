@@ -79,6 +79,7 @@ import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.WriteSettingsDetails;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.chroma.DisplayRotation;
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.DashboardTile;
@@ -354,6 +355,7 @@ public class SettingsActivity extends Activity
             ProcessStatsSummary.class.getName(),
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
+            DisplayRotation.class.getName()
     };
 
 
@@ -439,11 +441,8 @@ public class SettingsActivity extends Activity
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
-        // Override the fragment title for Wallpaper settings
         int titleRes = pref.getTitleRes();
-        if (pref.getFragment().equals(WallpaperTypeSettings.class.getName())) {
-            titleRes = R.string.wallpaper_settings_fragment_title;
-        } else if (pref.getFragment().equals(OwnerInfoSettings.class.getName())
+        if (pref.getFragment().equals(OwnerInfoSettings.class.getName())
                 && UserHandle.myUserId() != UserHandle.USER_OWNER) {
             if (UserManager.get(this).isLinkedUser()) {
                 titleRes = R.string.profile_info_settings_title;
