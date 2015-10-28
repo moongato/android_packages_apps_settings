@@ -5,12 +5,50 @@
 
     <PreferenceCategory
         android:key="category_navigation_options"
-        android:title="@string/display_category_navbar_options_title" >
+        android:title="@string/display_category_onscreen" >
 
-        <SwitchPreference
-            android:key="kill_app_longpress_back"
-            android:title="@string/kill_app_longpress_back"
-            android:summary="@string/kill_app_longpress_back_summary"/>
+    <com.android.settings.chroma.SystemSettingSwitchPreference
+        android:key="navigation_bar_show"
+        android:title="@string/navbar_enable_bar"
+        android:defaultValue="true" />
+
+    <ListPreference
+        android:entries="@array/navigation_bar_height_entries"
+        android:entryValues="@array/navigation_bar_height"
+        android:key="navigation_bar_height"
+        android:title="@string/navigation_bar_height_title"
+        android:persistent="false" />
+
+    <ListPreference
+        android:entries="@array/navigation_bar_width_entries"
+        android:entryValues="@array/navigation_bar_width"
+        android:key="navigation_bar_width"
+        android:title="@string/navigation_bar_width_title"
+        android:persistent="false" />
 
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="category_navigation_options"
+        android:title="@string/display_category_navbar_options_title" >
+
+    <SwitchPreference
+        android:key="kill_app_longpress_back"
+        android:title="@string/kill_app_longpress_back"
+        android:summary="@string/kill_app_longpress_back_summary"/>
+
+    </PreferenceCategory>
+
+	<PreferenceCategory
+	    android:key="recents_panel"
+	    android:title="@string/recents_panel_settings" >
+
+	<com.android.settings.chroma.SystemSettingSwitchPreference
+        android:key="recents_show_search_bar"
+        android:title="@string/recents_show_searchbar"
+        android:summary="@string/recents_show_searchbar_summary"
+        android:defaultValue="false" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
